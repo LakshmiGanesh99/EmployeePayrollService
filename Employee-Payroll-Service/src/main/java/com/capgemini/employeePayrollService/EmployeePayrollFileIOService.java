@@ -1,6 +1,7 @@
 package com.capgemini.employeePayrollService;
 
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,8 +12,8 @@ public class EmployeePayrollFileIOService {
 	public static String PAYROLL_FILE_NAME = "payroll-file.txt";
 
 	public void writeData(List<EmployeePayrollData> employeePayrollList) {
-		final StringBuffer empBuffer = new StringBuffer();
-		employeePayrollList.forEach(employee-> {
+		StringBuffer empBuffer = new StringBuffer();
+		employeePayrollList.forEach(employee -> {
 			String employeeDataString = employee.toString().concat("\n");
 			empBuffer.append(employeeDataString);
 		});
@@ -31,5 +32,13 @@ public class EmployeePayrollFileIOService {
 		} catch (IOException e) {
 		}
 		return entries;
+	}
+
+	public void printEntries() {
+		try {
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
